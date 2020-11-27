@@ -26,7 +26,7 @@ public class AsyncConfigure {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(6);
         taskExecutor.setMaxPoolSize(12);
-        taskExecutor.setThreadNamePrefix("Executor-");
+        taskExecutor.setThreadNamePrefix("taskExecutor-");
         taskExecutor.initialize();
         return taskExecutor;
     }

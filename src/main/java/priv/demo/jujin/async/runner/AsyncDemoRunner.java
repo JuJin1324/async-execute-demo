@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import priv.demo.jujin.async.service.AsyncExecutor;
+import priv.demo.jujin.async.service.AsyncExecutorService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,21 +20,18 @@ import java.util.concurrent.Future;
 @Component
 @Slf4j
 public class AsyncDemoRunner implements ApplicationRunner {
+    private final AsyncExecutorService asyncExecutorService;
+
+    public AsyncDemoRunner(AsyncExecutorService asyncExecutorService) {
+        this.asyncExecutorService = asyncExecutorService;
+    }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        AsyncExecutor<String> asyncExecutor = new AsyncExecutor<>();
+
         List<Future<String>> futures = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            futures.add(asyncExecutor.executeAsync(() -> {
-                log.info("start thread!");
-                try {
-                    Thread.sleep((int)(Math.random()*10) * 1000);
-                } catch (InterruptedException e) {
-                    log.error(e.getMessage());
-                }
-                return "hello";
-            }));
+            futures.add(asyncExecutorService.sayHelloAsync());
         }
         futures.forEach(stringFuture -> {
             while (true) {
