@@ -1,4 +1,6 @@
 # async-execute-demo
+> 본 설명은 Spring 에서 제공하는 Thread API 이며 자바에서 제공하는 Thread API 사용은 [Spring @Async 비동기처리](http://dveamer.github.io/java/SpringAsync.html) 이곳에서 
+> `Java 비동기방식 처리` 섹션을 참고한다.
 
 ## 설정
 ### Thread Bean 추가
